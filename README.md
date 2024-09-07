@@ -18,7 +18,7 @@ Clone the repository
 ```bash
 Copy code
 git clone https://github.com/aganet/postfix-relay-docker.git
-cd postfix-gmail-relay
+cd postfix-relay-docker
 ```
 
 ## Environment Variables
