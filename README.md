@@ -122,10 +122,12 @@ ports:
   - "25:25"
 ```
 
+
 ## Troubleshooting
 
-- **TLS or authentication errors**: Ensure your Gmail account uses an App Password if you have 2FA enabled.
-
+- **Authentication failed**: Check if your Gmail Workspace account is properly configured for SMTP relay.
+- **Connection refused on port 25**: Ensure no other services are using port 25 on your host machine. (If postfix is already installed on the host machine could possible use port25 , disable postfix on main host machine `systemctl stop postfix && systemctl disable postfix` ) 
+- **TLS/SSL errors**: Verify that your SMTP settings and certificates are correct and up to date.
 
 
 
