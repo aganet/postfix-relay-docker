@@ -1,5 +1,5 @@
 # Postfix Gmail Relay Docker Setup
-This repository contains a Dockerized setup for a Postfix relay server using Gmail as the SMTP relay host. This setup is useful for relaying emails from your internal applications or systems through Gmail, with environment variables to customize your configuration.
+This repository contains a Dockerized Postfix service setup configured as a Gmail SMTP relay. The container runs Postfix with SASL authentication to send emails through Gmail's SMTP server.
 
 ## Features
 - Relays emails through Gmail’s SMTP server (smtp.gmail.com).
@@ -13,6 +13,11 @@ This repository contains a Dockerized setup for a Postfix relay server using Gma
 - Docker installed on your system.
 - A Gmail account with App Passwords enabled (if using 2-factor authentication).
 - Basic understanding of Postfix and email relaying.
+
+
+- Docker: Ensure Docker is installed on your machine.
+- Gmail Workspace Account: This setup only works with Gmail accounts configured for relay via Google Workspace (formerly G Suite). It does not work with regular Gmail accounts. To set up Gmail as a relay, your Google Workspace admin needs to configure Gmail SMTP relay in your domain.
+- SMTP Credentials: You will need to provide your Google Workspace email and app password in the .env file.
 
 ## Getting Started
 Clone the repository
