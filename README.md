@@ -56,24 +56,8 @@ Replace your-email@gmail.com and your-app-password with your Gmail credentials. 
 
 
 ## To run via Docker Compose
-If you prefer using docker-compose for managing the container, you can create a docker-compose.yml file like this:
+If you prefer using docker-compose for managing the container, use the existind docket-compose.yml
 
-```yaml
-services:
-  postfix:
-    image: postfix-relay
-    container_name: postfix-relay
-    environment:
-      RELAY_HOST: smtp.gmail.com
-      RELAY_PORT: 587
-      MYHOSTNAME: mydomain.com
-      MYNETWORKS: "127.0.0.0/8 192.168.0.0/16"
-      SASL_PASSWD: "your-email@gmail.com:your-app-password"
-    ports:
-      - "25:25"
-    restart: always
-
-```
 Run the service using:
 
 ```bash
