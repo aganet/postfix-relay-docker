@@ -18,8 +18,8 @@ This repository contains a Dockerized Postfix service setup configured as a Gmai
 ## Getting Started
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/postfix-gmail-relay.git
-cd postfix-gmail-relay
+git clone https://github.com/aganet/postfix-relay-docker.git
+cd postfix-relay-docker
 ```
 
 ### 2. Create a `.env` file
@@ -69,7 +69,7 @@ You can override these values by setting them in the `.env` file or directly in 
 Once the container is up and running, you can test the email relay by using tools like `mail` or `sendmail`. Inside the running container:
 
 ```bash
-docker exec -it postfix-gmail-relay bash
+docker exec -it postfix-relay bash
 echo "Test email body" | mail -s "Test Subject" recipient@example.com
 ```
 
