@@ -66,12 +66,29 @@ You can override these values by setting them in the `.env` file or directly in 
 
 ### 6. Test Email Sending
 
-Once the container is up and running, you can test the email relay by using tools like `mail` or `sendmail`. Inside the running container:
+Test the relay from another computer (replace xx with the IP of the host running this docker)
+`telnet xx.xx.xx.xx 25`
 
+
+Edit and paste the following: 
 ```bash
-docker exec -it postfix-relay bash
-echo "Test email body" | mail -s "Test Subject" recipient@example.com
+EHLO testclient.com
+MAIL FROM:<name@gmail.com>
+RCPT TO:<name@gmail.com>
+DATA
+Subject: Test Email
+
+This is a test email sent through the Postfix relay.
+     
+.
+QUIT
+
+
 ```
+
+Check docker logs for error messages 
+
+
 
 ### 7. Logs
 
