@@ -16,65 +16,94 @@ This repository contains a Dockerized Postfix service setup configured as a Gmai
 
 
 ## Getting Started
-Clone the repository
+### 1. Clone the repository
 ```bash
-git clone https://github.com/aganet/postfix-relay-docker.git
-cd postfix-relay-docker
+git clone https://github.com/yourusername/postfix-gmail-relay.git
+cd postfix-gmail-relay
 ```
 
-## Environment Variables
-You can customize the Postfix setup by providing the following environment variables:
+### 2. Create a `.env` file
 
-- `RELAY_HOST`: The SMTP relay host (default: smtp.gmail.com).
-- `RELAY_PORT`: The SMTP port for relay (default: 587).
-- `MYHOSTNAME`: The hostname for the Postfix server (default: example.com).
-- `MYNETWORKS`: Networks allowed to relay mail through the server (default: 127.0.0.0/8).
-- `SASL_PASSWD`: Gmail SMTP username and password in defined in `.env` file.
-
-# Usage
-Build the Docker Image:
-```bash
-docker build -t postfix-relay .
-```
-
-## Run the Postfix Relay Server:
-
-You can start the relay server by running the Docker container:
+You need to create a `.env` file in the root of the repository with the following content:
 
 ```bash
-docker run -d --name postfix-relay \
-  -e RELAY_HOST=smtp.gmail.com \
-  -e RELAY_PORT=587 \
-  -e MYHOSTNAME=mydomain.com \
-  -e MYNETWORKS="127.0.0.0/8 192.168.0.0/16" \
-  -e SASL_PASSWD="your-email@gmail.com:your-app-password" \
-  -p 25:25 \
-  postfix-relay
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
 ```
 
+- Replace `your-email@gmail.com` with your Gmail email.
+- Replace `your-app-password` with your Gmail App Password.
 
-Replace your-email@gmail.com and your-app-password with your Gmail credentials. If you're using Gmail 2-factor authentication, you'll need to create an App Password.
 
+### 3. Build the Docker image
 
-## To run via Docker Compose
-If you prefer using docker-compose for managing the container, use the existind docket-compose.yml
+```bash
+docker build -t postfix-relay:latest .
+```
 
-Run the service using:
+### 4. Run the Docker container
+
+You can start the container using Docker Compose. It will automatically configure Postfix based on the environment variables defined in the `.env` file.
 
 ```bash
 docker-compose up -d
 ```
-Debugging
-If you encounter issues, check the logs for the Postfix container using:
 
-`docker logs postfix-relay` or `docker logs -f postfit-relay`
 
-You may need to ensure that:
+### 5. Configuration
 
-- Gmail App Passwords are correctly set up (if using 2FA).
-- Your Docker container can connect to the internet.
-- You’ve properly configured the `MYNETWORKS` and `SASL_PASSWD` environment variables.
+The following environment variables are used to configure the container:
 
-## Security Notes
-- App Passwords: If you use Gmail 2-factor authentication, you must use an App Password for authentication instead of your regular Gmail password.
-- Environment Variables: It is recommended to securely manage your credentials by using Docker secrets or environment files.
+| Variable      | Description                                                    | Default Value           |
+|---------------|----------------------------------------------------------------|-------------------------|
+| `RELAY_HOST`  | The relay SMTP server host (usually Gmail SMTP)                | `smtp.gmail.com`        |
+| `RELAY_PORT`  | The relay SMTP server port                                      | `587`                   |
+| `MYHOSTNAME`  | The hostname to use for Postfix                                 | `example.com`           |
+| `MYNETWORKS`  | Networks allowed to relay mail                                  | `127.0.0.0/8`           |
+| `SASL_PASSWD` | SASL authentication (username:password)                        | **Required**            |
+
+You can override these values by setting them in the `.env` file or directly in the `docker-compose.yml` file.
+
+### 6. Test Email Sending
+
+Once the container is up and running, you can test the email relay by using tools like `mail` or `sendmail`. Inside the running container:
+
+```bash
+docker exec -it postfix-gmail-relay bash
+echo "Test email body" | mail -s "Test Subject" recipient@example.com
+```
+
+### 7. Logs
+
+The container outputs Postfix logs to the console. You can view them with:
+`docker logs postfix-relay` or `docker logs -f postfix-relay`
+
+
+## Volumes
+
+If you need persistent storage for Postfix queues, uncomment the `volumes` section in the `docker-compose.yml`:
+
+```yaml
+volumes:
+  - ./postfix-spool:/var/spool/postfix
+```
+
+This will mount the host directory `./postfix-spool` to store the Postfix spool.
+
+## Ports
+
+The default port exposed is `25`. If you need to change it, modify the `ports` section in `docker-compose.yml`:
+
+```yaml
+ports:
+  - "25:25"
+```
+
+## Troubleshooting
+
+- **Error: SASL_PASSWD environment variable must be set**: Ensure that `SASL_PASSWD` is properly defined in the `.env` file as `user:password`.
+- **TLS or authentication errors**: Ensure your Gmail account uses an App Password if you have 2FA enabled.
+
+
+
+
