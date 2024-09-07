@@ -16,7 +16,6 @@ This repository contains a Dockerized setup for a Postfix relay server using Gma
 ## Getting Started
 Clone the repository
 ```bash
-Copy code
 git clone https://github.com/aganet/postfix-relay-docker.git
 cd postfix-relay-docker
 ```
@@ -33,7 +32,6 @@ You can customize the Postfix setup by providing the following environment varia
 # Usage
 Build the Docker Image:
 ```bash
-Copy code
 docker build -t postfix-relay .
 ```
 
