@@ -1,7 +1,7 @@
 services:
   postfix:
-    image: postfix-gmail-relay:latest
-    container_name: postfix-gmail-relay
+    image: postfix-relay
+    container_name: postfix-relay
     environment:
       RELAY_HOST: smtp.gmail.com
       RELAY_PORT: 587
