@@ -67,7 +67,11 @@ You can override these values by setting them in the `.env` file or directly in 
 ### 6. Test Email Sending
 
 Test the relay from another computer (replace xx with the IP of the host running this docker)
-`telnet xx.xx.xx.xx 25`
+```bash
+telnet xx.xx.xx.xx 25
+
+```
+
 
 
 Edit and paste the following: 
