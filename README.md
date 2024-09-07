@@ -122,7 +122,6 @@ ports:
 
 ## Troubleshooting
 
-- **Error: SASL_PASSWD environment variable must be set**: Ensure that `SASL_PASSWD` is properly defined in the `.env` file as `user:password`.
 - **TLS or authentication errors**: Ensure your Gmail account uses an App Password if you have 2FA enabled.
 
 
