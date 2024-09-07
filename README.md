@@ -40,14 +40,14 @@ docker build -t postfix-relay .
 You can start the relay server by running the Docker container:
 
 ```bash
-docker run -d --name postfix-gmail-relay \
+docker run -d --name postfix-relay \
   -e RELAY_HOST=smtp.gmail.com \
   -e RELAY_PORT=587 \
   -e MYHOSTNAME=mydomain.com \
   -e MYNETWORKS="127.0.0.0/8 192.168.0.0/16" \
   -e SASL_PASSWD="your-email@gmail.com:your-app-password" \
   -p 25:25 \
-  postfix-gmail-relay
+  postfix-relay
 ```
 
 
