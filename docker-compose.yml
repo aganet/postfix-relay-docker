@@ -1,13 +1,15 @@
 services:
   postfix:
-    image: postfix-relay
-    container_name: postfix-relay
+    image: postfix-gmail-relay:latest
+    container_name: postfix-gmail-relay
     environment:
-      RELAY_HOST: smtp.gmail.com #replace it with your relay host
+      RELAY_HOST: smtp.gmail.com
       RELAY_PORT: 587
       MYHOSTNAME: mydomain.com
-      MYNETWORKS: "127.0.0.0/8 192.168.0.0/16"  #Adjust to your network
-      SASL_PASSWD: "user@domain.com:yourpassword" 
+      MYNETWORKS: "192.168.1.0/24 127.0.0.0/8 192.168.0.0/16 172.17.0.0/16"
+      SASL_PASSWD: "${SMTP_USER}:${SMTP_PASS}"
+    env_file:
+      - .env
     #volumes:
     #  - ./postfix-spool:/var/spool/postfix
     ports:
