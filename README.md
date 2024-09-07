@@ -9,6 +9,8 @@ This repository contains a Dockerized Postfix service setup configured as a Gmai
 - Automatic configuration of Postfix with Docker.
 
 ## Requirements
+⚠️ **Important**: This solution only works with Gmail Workspace accounts that have SMTP relay configured. It will not work with regular Gmail accounts.
+
 - Docker: Ensure Docker is installed on your machine.
 - Gmail Workspace Account: This setup only works with Gmail accounts configured for relay via Google Workspace (formerly G Suite). It does not work with regular Gmail accounts. To set up Gmail as a relay, your Google Workspace admin needs to configure Gmail SMTP relay in your domain.
 - SMTP Credentials: You will need to provide your Google Workspace email and app password in the .env file.
