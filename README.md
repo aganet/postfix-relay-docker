@@ -24,7 +24,7 @@ git clone https://github.com/aganet/postfix-relay-docker.git
 cd postfix-relay-docker
 ```
 
-### 2. Create a `.env` file
+### 2. Create a `.env` file  and edit Variables in docker-compose.yaml (MYNETWORKS, etc... )
 
 You need to create a `.env` file in the root of the repository with the following content:
 
