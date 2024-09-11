@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 RUN apt-get update && \
-    apt-get install -y postfix libsasl2-2 libsasl2-modules sasl2-bin mailutils ca-certificates dnsutils iputils-ping vim && \
+    apt-get install -y postfix prometheus-postfix-exporter libsasl2-2 libsasl2-modules sasl2-bin mailutils ca-certificates dnsutils iputils-ping vim && \
     rm -rf /var/lib/apt/lists/*
 
 COPY postfix-init.sh /usr/local/bin/postfix-init.sh
