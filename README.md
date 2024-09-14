@@ -40,7 +40,8 @@ SMTP_PASS=your-app-password
 ### 3. Build the Docker image
 
 ```bash
-docker build -t postfix-relay:latest .
+docker build -t postfix-relay:latest ./build
+
 ```
 
 ### 4. Run the Docker container
